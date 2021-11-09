@@ -18,37 +18,37 @@ char movement = ' ';
 char prevMovement = ' ';
 
 // Basic maze 1
-//void setup_robot(struct Robot *robot){
-//    robot->x = 270;
-//    robot->y = 460;
-//    robot->true_x = 270;
-//    robot->true_y = 460;
-//    robot->width = ROBOT_WIDTH;
-//    robot->height = ROBOT_HEIGHT;
-//    robot->direction = 0;
-//    robot->angle = 0;
-//    robot->currentSpeed = 0;
-//    robot->crashed = 0;
-//    robot->auto_mode = 0;
-//
-//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
-//}
-// Basic maze 2
 void setup_robot(struct Robot *robot){
-    robot->x = 620;
-    robot->y = 380;
-    robot->true_x = 620;
-    robot->true_y = 380;
+    robot->x = 270;
+    robot->y = 460;
+    robot->true_x = 270;
+    robot->true_y = 460;
     robot->width = ROBOT_WIDTH;
     robot->height = ROBOT_HEIGHT;
     robot->direction = 0;
-    robot->angle = 270;
+    robot->angle = 0;
     robot->currentSpeed = 0;
     robot->crashed = 0;
     robot->auto_mode = 0;
 
     printf("Press arrow keys to move manually, or enter to move automatically\n\n");
 }
+// Basic maze 2
+//void setup_robot(struct Robot *robot){
+//    robot->x = 620;
+//    robot->y = 380;
+//    robot->true_x = 620;
+//    robot->true_y = 380;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 270;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 
 // Basic Maze 3
 //void setup_robot(struct Robot *robot){
@@ -387,10 +387,7 @@ void robotUpdate(struct SDL_Renderer * renderer, struct Robot * robot){
     //Other Display options:
     // The actual square which the robot is tested against (not so nice visually with turns, but easier
     // to test overlap
-    SDL_Rect rect = {robot->x, robot->y, robot->height, robot->width};
-    SDL_SetRenderDrawColor(renderer, 80, 80, 80, 255);
-    SDL_RenderDrawRect(renderer, &rect);
-    SDL_RenderFillRect(renderer, &rect);
+
     */
     /*
     //Center Line of Robot. Line shows the direction robot is facing
@@ -515,7 +512,7 @@ void robotMotorMove(struct Robot * robot) {
         case RIGHT :
             robot->angle = (robot->angle+DEFAULT_ANGLE_CHANGE)%360;
             break;
-        case STOP :
+        case BACK :
             robot->currentSpeed = 0;
             break;
     }
@@ -554,7 +551,7 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         // If the robot is range of the wall, turn back forward
         else{
             *start = *start + 1;
-            robot->direction = STOP;
+            robot->direction = BACK;
         }
     }
 
