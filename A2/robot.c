@@ -1,30 +1,40 @@
 #include "robot.h"
 
 //U = up, D = Down, L = left, R = right
+char direction = 'U';
+char prev_direction = 'M';
 int timer = 0;
 int right_timer = 0;
+int change = 0;
+int count = 0;
+int count_timer = 0;
+int slow_down_timer_right = 0;
+int slow_down_timer_left = 0;
+// Sample maze
+
+
 char state = '1';
 char movement = ' ';
 char prevMovement = ' ';
 
 // Basic maze 1
-/*void setup_robot(struct Robot *robot){
-    robot->x = 270;
-    robot->y = 460;
-    robot->true_x = 270;
-    robot->true_y = 460;
-    robot->width = ROBOT_WIDTH;
-    robot->height = ROBOT_HEIGHT;
-    robot->direction = 0;
-    robot->angle = 0;
-    robot->currentSpeed = 0;
-    robot->crashed = 0;
-    robot->auto_mode = 0;
-
-    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
-}*/
+//void setup_robot(struct Robot *robot){
+//    robot->x = 270;
+//    robot->y = 460;
+//    robot->true_x = 270;
+//    robot->true_y = 460;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 0;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 // Basic maze 2
-/*void setup_robot(struct Robot *robot){
+void setup_robot(struct Robot *robot){
     robot->x = 620;
     robot->y = 380;
     robot->true_x = 620;
@@ -38,58 +48,109 @@ char prevMovement = ' ';
     robot->auto_mode = 0;
 
     printf("Press arrow keys to move manually, or enter to move automatically\n\n");
-}*/
-
-// Basic Maze 3
-void setup_robot(struct Robot *robot){
-    robot->x = 640-10-270;
-    robot->y = 460;
-    robot->true_x = 640-10-270;
-    robot->true_y = 460;
-    robot->width = ROBOT_WIDTH;
-    robot->height = ROBOT_HEIGHT;
-    robot->direction = 0;
-    robot->angle = 0;
-    robot->currentSpeed = 0;
-    robot->crashed = 0;
-    robot->auto_mode = 0;
-
-    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
 }
 
-// Basic Maze 4
-/*void setup_robot(struct Robot *robot){
-    robot->x = 0;
-    robot->y = 380;
-    robot->true_x = 0;
-    robot->true_y = 380;
-    robot->width = ROBOT_WIDTH;
-    robot->height = ROBOT_HEIGHT;
-    robot->direction = 0;
-    robot->angle = 90;
-    robot->currentSpeed = 0;
-    robot->crashed = 0;
-    robot->auto_mode = 0;
+// Basic Maze 3
+//void setup_robot(struct Robot *robot){
+//    robot->x = 640-10-270;
+//    robot->y = 460;
+//    robot->true_x = 640-10-270;
+//    robot->true_y = 460;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 0;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 
-    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
-}*/
+//// Basic Maze 4
+//void setup_robot(struct Robot *robot){
+//    robot->x = 0;
+//    robot->y = 380;
+//    robot->true_x = 0;
+//    robot->true_y = 380;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 90;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 
-//Maze 5
-/*void setup_robot(struct Robot *robot){
-    robot->x = 170;
-    robot->y = 460;
-    robot->true_x = 170;
-    robot->true_y = 460;
-    robot->width = ROBOT_WIDTH;
-    robot->height = ROBOT_HEIGHT;
-    robot->direction = 0;
-    robot->angle = 0;
-    robot->currentSpeed = 0;
-    robot->crashed = 0;
-    robot->auto_mode = 0;
+////Maze 5
+//void setup_robot(struct Robot *robot){
+//    robot->x = 170;
+//    robot->y = 460;
+//    robot->true_x = 170;
+//    robot->true_y = 460;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 0;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 
-    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
-}*/
+//Maze 6
+//void setup_robot(struct Robot *robot){
+//    robot->x = 620;
+//    robot->y = 40;
+//    robot->true_x = 620;
+//    robot->true_y = 40;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 270;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
+
+////Maze 7
+//void setup_robot(struct Robot *robot){
+//    robot->x = 640-10-170;
+//    robot->y = 460;
+//    robot->true_x = 640-10-170;
+//    robot->true_y = 460;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 0;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
+
+//Maze 8
+//void setup_robot(struct Robot *robot){
+//    robot->x = 0;
+//    robot->y = 40;
+//    robot->true_x = 0;
+//    robot->true_y = 40;
+//    robot->width = ROBOT_WIDTH;
+//    robot->height = ROBOT_HEIGHT;
+//    robot->direction = 0;
+//    robot->angle = 90;
+//    robot->currentSpeed = 0;
+//    robot->crashed = 0;
+//    robot->auto_mode = 0;
+//
+//    printf("Press arrow keys to move manually, or enter to move automatically\n\n");
+//}
 
 int robot_off_screen(struct Robot * robot){
     if(robot->x < 0 || robot-> y < 0){
@@ -234,7 +295,7 @@ int checkRobotSensorRightAllWalls(struct Robot * robot, struct Wall_collection *
     return score;
 }
 
-int checkRobotSensorFrontLeftAllWalls(struct Robot * robot, struct Wall_collection * head) {
+int checkRobotSensorFrontRightAllWalls(struct Robot * robot, struct Wall_collection * head) {
     struct Wall_collection *ptr, *head_store; // ptr and head_store point to the walls
     int i;
     double xDir, yDir;
@@ -274,7 +335,7 @@ int checkRobotSensorFrontLeftAllWalls(struct Robot * robot, struct Wall_collecti
     return score;
 }
 
-int checkRobotSensorFrontRightAllWalls(struct Robot * robot, struct Wall_collection * head) {
+int checkRobotSensorFrontLeftAllWalls(struct Robot * robot, struct Wall_collection * head) {
     struct Wall_collection *ptr, *head_store; // ptr and head_store point to the walls
     int i;
     double xDir, yDir;
@@ -357,7 +418,7 @@ void robotUpdate(struct SDL_Renderer * renderer, struct Robot * robot){
     xBR = (int) xDir;
     yBR = (int) yDir;
 
-    // Front left
+    // Front Left
     xDir = round(robotCentreX+(-ROBOT_WIDTH/2)*cos((robot->angle)*PI/180)-(ROBOT_HEIGHT/2)*sin((robot->angle)*PI/180));
     yDir = round(robotCentreY+(-ROBOT_WIDTH/2)*sin((robot->angle)*PI/180)+(ROBOT_HEIGHT/2)*cos((robot->angle)*PI/180));
     xBL = (int) xDir;
@@ -454,8 +515,8 @@ void robotMotorMove(struct Robot * robot) {
         case RIGHT :
             robot->angle = (robot->angle+DEFAULT_ANGLE_CHANGE)%360;
             break;
-        case BACK :
-            robot->currentSpeed -= 5;
+        case STOP :
+            robot->currentSpeed = 0;
             break;
     }
     robot->direction = 0;
@@ -476,6 +537,7 @@ void robotMotorMove(struct Robot * robot) {
 void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor, int front_left_sensor, int front_right_sensor, int *start) {
 
     printf("L: %d | R: %d | FL: %d| FR: %d\n", left_sensor, right_sensor, front_left_sensor, front_right_sensor);
+//    printf("FL: %d\n", front_left_sensor);
     // Calibrate the robot to stick to the wall
     // Turn the robot left 90 degrees incrementally
     if (*start < 4){
@@ -492,7 +554,7 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         // If the robot is range of the wall, turn back forward
         else{
             *start = *start + 1;
-            robot->direction = BACK;
+            robot->direction = STOP;
         }
     }
 
@@ -503,12 +565,17 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         printf("Start: %d\n", *start);
 
     }
+    else if (*start == 8){
+        *start = 20;
+        printf("Start: %d\n", *start);
+    }
 
     // The wall follow code
-    else if (*start == 8){
+    else if (*start == 20){
+
         // Movement code
         // If we need to shift a bit right
-        if(movement == 'r'){
+        if(movement == 'r' && prevMovement != 'C'){
             printf("Movement is r\n");
             if(timer < 1){
                 timer ++;
@@ -525,7 +592,7 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         }
 
         // Full right turn
-        else if(movement == 'R'){
+        else if(movement == 'R' && prevMovement != 'C'){
             printf("Movement is R\n");
             if(timer < 2){
                 robot->direction = RIGHT;
@@ -544,9 +611,14 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
 
 
         // Full left turn
-        else if(movement == 'L'){
+        else if(movement == 'L' && prevMovement != 'C'){
             printf("Movement is L\n");
-            if(timer < 2){
+            if (front_left_sensor == front_right_sensor && front_left_sensor > 1) {
+                prevMovement = 'L';
+                movement = 's';
+                timer = 0;
+            }
+            else if(timer < 2){
                 //robot->direction = LEFT;
                 timer ++;
             }
@@ -558,14 +630,13 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         }
 
         // Little left adjust
-        else if(movement == 'l'){
+        else if(movement == 'l' && prevMovement != 'C'){
             printf("Movement is l\n");
             if(front_right_sensor == 3 && prevMovement == 'L'){
                 movement = 'R';
                 robot->direction = RIGHT;
             }
             else if(left_sensor == 2 && right_sensor == 0 && front_left_sensor == 1 && front_right_sensor == 1 && prevMovement == 'R'){
-                printf("Fix\n");
                 movement = 'R';
                 robot->direction = RIGHT;
             }
@@ -589,13 +660,9 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
             }
         }
 
-
-
-
-
         // Case 2: The front and right readings are 0
         // Curve correction
-        else if ((right_sensor == 0) && (front_left_sensor == 0) && (front_right_sensor == 0) && (left_sensor > 0 && left_sensor <= 4)){
+        else if ((right_sensor == 0) && (front_left_sensor == 0) && (front_right_sensor == 0) && (left_sensor > 0 && left_sensor <= 4) && prevMovement != 'C'){
             printf("Case 2\n");
             /*if (left_sensor == 3){
                robot->direction = UP;
@@ -616,7 +683,7 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         }
 
         // Case 3: Full left turn
-        else if (left_sensor == 0 && front_left_sensor == 0 && front_right_sensor == 0){
+        else if (left_sensor == 0 && front_left_sensor == 0 && front_right_sensor == 0 ){
             printf("Case 3\n");
             movement = 'L';
             robot->direction = LEFT;
@@ -629,13 +696,6 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
             robot->direction = RIGHT;
         }
 
-        // Case 5: Little right turn
-        else if (left_sensor == 2 && right_sensor == 0 && front_left_sensor == 1 && front_right_sensor == 3){
-            printf("Case 5\n");
-            movement = 'l';
-            robot->direction = RIGHT;
-        }
-
         else if(prevMovement == 'L' && left_sensor == 0 && right_sensor == 0 && front_left_sensor == 2 && front_right_sensor == 2){
             movement = 'R';
             robot->direction = RIGHT;
@@ -644,7 +704,102 @@ void robotAutoMotorMove(struct Robot * robot, int left_sensor, int right_sensor,
         // This is for the complex mazes
         else{
             printf("Curve\n");
-            robot->direction =UP;
+
+            if (front_left_sensor > front_right_sensor && front_right_sensor > 0 && left_sensor < 2 && right_sensor < 2) {
+                robot -> direction = RIGHT;
+            }
+            else if (front_left_sensor < front_right_sensor && front_left_sensor > 0 && left_sensor < 2 && right_sensor < 2) {
+                robot -> direction = LEFT;
+            }
+            else if (front_left_sensor == front_right_sensor && front_left_sensor > 1 && left_sensor < 2 && right_sensor < 2) {
+                robot -> direction = RIGHT;
+            }
+            // this is for reflex angle right turns
+            else if (front_left_sensor > 0 && front_right_sensor > 0 && left_sensor > 0 && front_left_sensor != front_right_sensor) {
+                if (slow_down_timer_right < 7 && slow_down_timer_right >= 0) {
+                    robot -> direction = DOWN;
+                    slow_down_timer_right++;
+                }
+                else if (slow_down_timer_right >= 7 && slow_down_timer_right < 11) {
+                    slow_down_timer_right++;
+                }
+                else if (slow_down_timer_right == 11 && slow_down_timer_right == 12) {
+                    robot -> direction = RIGHT;
+                    slow_down_timer_right++;
+                }
+                else if (slow_down_timer_right >= 13 && slow_down_timer_right < 15) {
+                    robot -> direction = UP;
+                    slow_down_timer_right++;
+                }
+                else if (slow_down_timer_right == 15) {
+                    slow_down_timer_right = -1;
+                }
+                else {
+                    robot -> direction = RIGHT;
+                }
+            }
+            else if (front_left_sensor > 0 && front_right_sensor > 0 && right_sensor > 0 && front_left_sensor != front_right_sensor) {
+                if (slow_down_timer_left < 7 && slow_down_timer_left >= 0) {
+                    robot -> direction = DOWN;
+                    slow_down_timer_left++;
+                }
+                else if (slow_down_timer_left >= 7 && slow_down_timer_right < 11) {
+                    slow_down_timer_left++;
+                }
+                else if (slow_down_timer_left == 11) {
+                    robot -> direction = LEFT;
+                    slow_down_timer_left++;
+                }
+                else if (slow_down_timer_left >= 12 && slow_down_timer_left < 14) {
+                    robot -> direction = UP;
+                    slow_down_timer_left++;
+                }
+                else if (slow_down_timer_left == 14) {
+                    slow_down_timer_left = -1;
+                }
+                else {
+                    robot -> direction = LEFT;
+                }
+                robot -> direction = LEFT;
+            }
+            else if (front_left_sensor > 0 && left_sensor > 0) {
+                robot -> direction = RIGHT;
+            }
+            else if (front_right_sensor > 0 && right_sensor > 0) {
+                robot -> direction = LEFT;
+            }
+            else if (front_left_sensor - right_sensor > 0 && right_sensor > 1) {
+                robot -> direction = RIGHT;
+            }
+            else if (front_right_sensor - left_sensor > 0 && left_sensor > 1) {
+                robot -> direction = LEFT;
+            }
+            else if (left_sensor - right_sensor > 0 && right_sensor > 0) {
+                robot -> direction = RIGHT;
+            }
+            else if (right_sensor - left_sensor > 0 && left_sensor > 0) {
+                robot -> direction = LEFT;
+            }
+            else if (left_sensor == right_sensor == front_left_sensor == 0 && front_right_sensor > 0) {
+                robot -> direction = LEFT;
+            }
+            else if (left_sensor == right_sensor == front_right_sensor == 0 && front_left_sensor > 0) {
+                robot -> direction = RIGHT;
+            }
+            else if (left_sensor == 4 && right_sensor == front_left_sensor == front_right_sensor == 0) {
+                robot -> direction = RIGHT;
+            }
+            else if (right_sensor == 4 && left_sensor == front_left_sensor == front_right_sensor == 0) {
+                robot -> direction = LEFT;
+            }
+            else if (left_sensor == right_sensor == front_left_sensor == front_right_sensor == 0) {
+                robot -> direction = UP;
+            }
+            else {
+                robot -> direction = UP;
+            }
+
+            prevMovement = 'C';
 
         }
 
